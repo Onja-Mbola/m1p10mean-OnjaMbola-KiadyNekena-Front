@@ -1,0 +1,10 @@
+.footer.has-cards:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 500px;
+    height: 2082px;
+    background: #f3f5ff;
+    transform: skew(0, -2deg);
+}
