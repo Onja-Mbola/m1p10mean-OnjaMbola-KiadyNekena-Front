@@ -17,7 +17,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 
-import { AuthApiService } from './service/auth-api.service';
+import { AuthApiService } from './service/authApi.service';
 
 @NgModule({
   declarations: [

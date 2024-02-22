@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthApiService } from '../service/auth-api.service';
+import { AuthApiService } from '../service/authApi.service';
 
 @Component({
     selector: 'app-signup',
