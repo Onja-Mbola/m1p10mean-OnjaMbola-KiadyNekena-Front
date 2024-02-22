@@ -35,15 +35,15 @@ export class SignupComponent implements OnInit {
           email: [
             '',
             [
-              Validators.required,
-              Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+               Validators.required,
+               Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}$'),
             ],
-          ],
+         ],
           password: ['', [Validators.required]],
           dateOfBirth: ['', [Validators.required]],
           sexe: ['', [Validators.required]],
           address: ['', [Validators.required]],
-          phoneNumber: ['', [Validators.required, Validators.pattern('^[0-13]+$')]],
+          phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9+]+$')]],
         });
       }
 
@@ -57,12 +57,16 @@ export class SignupComponent implements OnInit {
   get myForm() {
     return this.registerForm.controls;
   }
-  onSubmit() {
+  /*onSubmit() {
     this.submitted = true;
+    //if (!this.registerForm.valid) {
+    //  console.log('Form is not valid. Control status:', this.registerForm.valid);
+    // return false;
     if (!this.registerForm.valid) {
-        console.log('Form is not valid. Control status:', this.registerForm.valid);
+      console.log('Le formulaire n\'est pas valide. État des contrôles :', this.registerForm);
       return false;
     } else {
+      console.log(this.registerForm.value);
       return this.authApiService.registerClient(this.registerForm.value).subscribe({
         complete: () => {
           console.log('Next level created!'),
@@ -73,5 +77,30 @@ export class SignupComponent implements OnInit {
         },
       });
     }
+  }*/
+
+  onSubmit() {
+    this.submitted = true;
+    if (!this.registerForm.valid) {
+      console.log('Le formulaire n\'est pas valide. État des contrôles :', this.registerForm);
+      return false;
+    } else {
+      const formData = { ...this.registerForm.value };
+  
+      // Convertir la chaîne de caractères en objet Date
+      formData.dateOfBirth = new Date(formData.dateOfBirth);
+  
+      return this.authApiService.registerClient(formData).subscribe({
+        complete: () => {
+          console.log('Next level created!'),
+          this.ngZone.run(() => this.router.navigateByUrl('/'));
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
+    }
   }
+  
+  
 }
