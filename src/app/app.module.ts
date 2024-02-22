@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
+
+import { AuthApiService } from './service/auth-api.service';
 
 @NgModule({
   declarations: [
@@ -31,10 +34,12 @@ import { LoginComponent } from './login/login.component';
     NgbModule,
     FormsModule,
     RouterModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

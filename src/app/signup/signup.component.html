@@ -16,92 +16,144 @@
           <div class="card bg-secondary shadow border-0">
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                Creer votre compte 
+                <h1>Creer votre compte</h1> 
               </div>
-              <form role="form">
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                 <div class="form-group" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      <span class="input-group-text"><i class="fa fa-address-card"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Nom" type="text" (focus)="focus=true" (blur)="focus=false">
+                    <input class="form-control" placeholder="Nom" formControlName="firstName" type="text" (focus)="focus=true" (blur)="focus=false">
                   </div>
+                  <!-- error -->
+                  <div class="text-danger"
+                  *ngIf="submitted && myForm['firstName'].errors?.['required']">
+                  Veuillez entrer votre nom
+                </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      <span class="input-group-text"><i class="fa fa-address-card"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Prenom" type="text" (focus)="focus=true" (blur)="focus=false">
+                    <input class="form-control" placeholder="Prenom" type="text" formControlName="lastName"  (focus)="focus=true" (blur)="focus=false">
                   </div>
+                  <div class="text-danger"
+                  *ngIf="submitted && myForm['lastName'].errors?.['required']">
+                 Veuillez entrer votre prenom
+                </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      <span class="input-group-text"><i class="fa fa-user"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Sexe" type="text" (focus)="focus=true" (blur)="focus=false">
+                    <select
+                      class="custom-select form-control"
+                      (change)="updateSexe($event.target.value)"
+                      formControlName="sexe"
+                    >
+                      <option value="">Choisir...</option>
+                      <option
+                        *ngFor="let sexe of ClientSexe"
+                        value="{{ sexe }}"
+                      >
+                        {{ sexe }}
+                      </option>
+                    </select>
+                    
                   </div>
+                  <!-- error -->
+                  <div
+                  class="text-danger"
+                  *ngIf="submitted && myForm['sexe'].errors?.['required']"
+                >
+                  Veuillez choisir votre sexe
+                </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                    </div>
+                    <input class="form-control datepicker" formControlName="dateOfBirth" placeholder="Date de naissance" name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" type="text"/>
+                  </div>
+                  <!-- error -->
+                  <div
+                  class="text-danger"
+                  *ngIf="submitted && myForm['email'].errors?.['required']"
+                >
+                 Veuillez entrer votre date de naissance
+                </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      <span class="input-group-text"><i class="fa fa-home"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Date de naissance" type="text" (focus)="focus=true" (blur)="focus=false">
+                    <input class="form-control" placeholder="Adresse" formControlName="address" type="text" (focus)="focus=true" (blur)="focus=false">
+                     
                   </div>
+                  <!-- error -->
+                  <div
+                  class="text-danger"
+                  *ngIf="submitted && myForm['address'].errors?.['required']"
+                >
+                 Veuillez entrer votre addresse
+                </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      <span class="input-group-text"><i class="fa fa-phone"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Telephone" type="text" (focus)="focus=true" (blur)="focus=false">
+                    <input class="form-control" placeholder="Telephone" formControlName="phoneNumber" type="text" (focus)="focus=true" (blur)="focus=false">
+                 
                   </div>
-                </div>
-                <div class="form-group" [ngClass]="{'focused':focus===true}">
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Adresse" type="text" (focus)="focus=true" (blur)="focus=false">
-                  </div>
+                   <!-- error -->
+                   <div
+                   class="text-danger"
+                   *ngIf="submitted && myForm['phoneNumber'].errors?.['required']"
+                 >
+                   Veuillez entrer votre numero de téléphone
+                 </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus1===true}">
                   <div class="input-group input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" (focus)="focus1=true" (blur)="focus1=false">
+                    <input class="form-control" placeholder="Email" formControlName="email" type="email" (focus)="focus1=true" (blur)="focus1=false">
+                    
                   </div>
+                  <!-- error -->
+                  <div
+                  class="text-danger"
+                  *ngIf="submitted && myForm['email'].errors?.['required']"
+                >
+                  Veuillez entrer votre adresse mail
+                </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus2===true}">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Mot de passe" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                    <input class="form-control" placeholder="Mot de passe" formControlName="password" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                  
                   </div>
+                  <!-- error -->
+                  <div
+                  class="text-danger"
+                  *ngIf="submitted && myForm['password'].errors?.['required']"
+                >
+                  Veuillez entrer un mot de passe correcte
                 </div>
-                <div class="text-muted font-italic">
-                  <small>password strength:
-                    <span class="text-success font-weight-700">strong</span>
-                  </small>
                 </div>
-                <div class="row my-4">
-                  <div class="col-12">
-                    <div class="custom-control custom-control-alternative custom-checkbox">
-                      <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                      <label class="custom-control-label" for="customCheckRegister">
-                        <span>J'accepte
-                          <a href="javascript:void(0)">la politique de confidentialite</a>
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
+              
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary mt-4">Create account</button>
+                  <button type="submit" class="btn btn-primary mt-4">S'inscrire</button>
                 </div>
               </form>
             </div>
