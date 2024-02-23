@@ -93,7 +93,13 @@ export class SignupComponent implements OnInit {
       return this.authApiService.registerClient(formData).subscribe({
         complete: () => {
           console.log('Next level created!'),
-          this.ngZone.run(() => this.router.navigateByUrl('/'));
+          // Redirect to home ("/") route
+            this.ngZone.run(() => {
+                this.router.navigateByUrl('/');
+    
+                // Display an alert after redirection
+                alert('Verify your email.'); // You might want to use a more user-friendly notification method
+            });
         },
         error: (e) => {
           console.log(e);
