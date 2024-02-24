@@ -9,7 +9,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class ServiceApiService {
+export class ServiceService {
   baseUri: string = 'http://localhost:3000/api/service';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {}

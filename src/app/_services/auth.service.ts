@@ -6,13 +6,26 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root',
 })
-export class AuthApiService {
+
+export class AuthService {
   baseUri: string = 'http://localhost:3000/api/auth';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {}
+
+  // Login
+  loginClient(credentials): Observable<any> {
+    let url = `${this.baseUri}/loginClient`;
+    return this.http.post(url, {
+      username: credentials.username,
+      password: credentials.password
+    },httpOptions);
+  }
 
   // Register
   registerClient(data): Observable<any> {

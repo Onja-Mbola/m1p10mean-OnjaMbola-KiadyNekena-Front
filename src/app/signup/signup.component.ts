@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthApiService } from '../service/authApi.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
     selector: 'app-signup',
@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
         public fb: FormBuilder,
         private router: Router,
         private ngZone: NgZone,
-        private authApiService: AuthApiService
+        private authApiService: AuthService
     ) {
         this.mainForm();
      }

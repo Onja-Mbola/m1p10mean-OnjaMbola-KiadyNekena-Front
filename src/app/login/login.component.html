@@ -18,21 +18,49 @@
               <div class="text-center text-muted mb-4">
                 Se Connecter
               </div>
-              <form role="form">
+              <form *ngIf="!isLoggedIn"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmit()"
+              #f="ngForm"
+              novalidate>
                 <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" (focus)="focus=true" (blur)="focus=false">
+                    <input class="form-control" placeholder="Email" type="email" name="email"
+                    [(ngModel)]="form.email"
+                    required
+                    #email="ngModel" (focus)="focus=true" (blur)="focus=false">
                   </div>
+                  <div
+                      class="alert alert-danger"
+                      role="alert"
+                      *ngIf="f.submitted && username.invalid"
+                    >
+                      Veuillez entrer votre adresse email!
+                    </div>
                 </div>
                 <div class="form-group" [ngClass]="{'focused':focus1===true}">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Mot de passe" type="password" (focus)="focus1=true" (blur)="focus1=false">
+                    <input class="form-control" placeholder="Mot de passe" type="password" name="password"
+                    [(ngModel)]="form.password"
+                    required
+                    minlength="6"
+                    #password="ngModel" (focus)="focus1=true" (blur)="focus1=false">
+                  </div>
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="f.submitted && password.invalid"
+                  >
+                    <div *ngIf="password.errors.required">Veuillez entrer votre mot de passe</div>
+                    <div *ngIf="password.errors.minlength">
+                      Password must be at least 6 characters
+                    </div>
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -42,7 +70,16 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Se Connecter</button>
+                  <button type="submit" class="btn btn-primary my-4">Se Connecter</button>
+                </div>
+                <div class="form-group">
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="f.submitted && isLoginFailed"
+                  >
+                    Login failed: {{ errorMessage }}
+                  </div>
                 </div>
               </form>
             </div>
