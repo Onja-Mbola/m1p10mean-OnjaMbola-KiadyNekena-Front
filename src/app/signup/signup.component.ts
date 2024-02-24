@@ -2,6 +2,9 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
+import { passwordStrengthValidator } from '../_helpers/password-strength.validator';
+import { phoneNumberValidator } from '../_helpers/phone-number.validator';
+import { ToastService } from '../toast/toast.service';
 
 @Component({
     selector: 'app-signup',
@@ -23,7 +26,8 @@ export class SignupComponent implements OnInit {
         public fb: FormBuilder,
         private router: Router,
         private ngZone: NgZone,
-        private authApiService: AuthService
+        private authApiService: AuthService,
+        public toastService: ToastService
     ) {
         this.mainForm();
      }
@@ -36,14 +40,14 @@ export class SignupComponent implements OnInit {
             '',
             [
                Validators.required,
-               Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}$'),
+               Validators.email,
             ],
          ],
-          password: ['', [Validators.required]],
+          password: ['', [Validators.required,passwordStrengthValidator(3)]],
           dateOfBirth: ['', [Validators.required]],
           sexe: ['', [Validators.required]],
           address: ['', [Validators.required]],
-          phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9+]+$')]],
+          phoneNumber: ['', [Validators.required, phoneNumberValidator]],
         });
       }
 
@@ -53,6 +57,13 @@ export class SignupComponent implements OnInit {
       onlySelf: true,
     });
   }
+  showSuccess(text) {
+		this.toastService.show(text, { classname: 'bg-success text-light m-3 p-3 ', delay: 10000 });
+	}
+
+	showDanger(dangerTpl) {
+		this.toastService.show(dangerTpl, { classname: 'alert-danger text-light  m-3 p-3', delay: 15000 });
+	}
   // Getter to access form control
   get myForm() {
     return this.registerForm.controls;
@@ -98,11 +109,13 @@ export class SignupComponent implements OnInit {
                 this.router.navigateByUrl('/');
     
                 // Display an alert after redirection
-                alert('Verify your email.'); // You might want to use a more user-friendly notification method
+                // alert('Verify your email.'); // You might want to use a more user-friendly notification method
+                this.showSuccess("Votre compte a ete cree , veuillez verifier votre mail");
             });
         },
         error: (e) => {
           console.log(e);
+          this.showDanger(e.error.message);
         },
       });
     }
