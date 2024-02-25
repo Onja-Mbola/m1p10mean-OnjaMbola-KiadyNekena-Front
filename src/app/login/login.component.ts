@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
             // this.ngZone.run(() => {
             //     this.router.navigateByUrl('/');
                 
-            //     // window.location.href="/";
+                window.location.href="/user-profile";
 
                 
     
@@ -98,12 +98,12 @@ export class LoginComponent implements OnInit {
             // });
 
 
-            this.ngZone.run(() => {
-              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-                this.router.navigate(['/']);
-                this.showSuccess("Vous êtes connecté");
-              });
-            });
+            // this.ngZone.run(() => {
+            //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            //     this.router.navigate(['/']);
+            //     this.showSuccess("Vous êtes connecté");
+            //   });
+            // });
             
         },
         error: (e) => {
