@@ -36,6 +36,10 @@ export class NavbarComponent implements OnInit {
          this.lastPoppedUrl = ev.url;
      });
     }
+    navigateToExternalLink() {
+       
+          window.location.href = 'http://localhost:4300/';
+      }
 
     isHome() {
         var titlee = this.location.prepareExternalUrl(this.location.path());

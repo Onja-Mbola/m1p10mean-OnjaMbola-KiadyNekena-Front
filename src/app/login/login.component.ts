@@ -85,26 +85,10 @@ export class LoginComponent implements OnInit {
 
           console.log('Next level created!');
           // Redirect to home ("/") route
-            // this.ngZone.run(() => {
-            //     this.router.navigateByUrl('/');
-                
-                window.location.href="/user-profile";
-
-                
-    
-            //     // Display an alert after redirection
-            //     // alert('vous etes connecte.'); // You might want to use a more user-friendly notification method
-            //     this.showSuccess("Vous etes connecte");
-            // });
-
-
-            // this.ngZone.run(() => {
-            //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            //     this.router.navigate(['/']);
-            //     this.showSuccess("Vous êtes connecté");
-            //   });
-            // });
-            
+            this.ngZone.run(() => {
+                this.router.navigateByUrl('/');
+                this.showSuccess("Vous etes connecte");
+            });
         },
         error: (e) => {
           this.errorMessage = e.message;

@@ -37,20 +37,16 @@
           <a class="nav-link" [routerLink]="['/landing']" fragment="partners" >Nos Partenaires</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/landing']" fragment="partners" >Rendez-vous</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/landing']" fragment="contact" >Contact</a>
         </li>
         <li class="nav-item" ngbDropdown placement="bottom-right">
           <a class="nav-link no-caret" id="navbar-primary_dropdown_1" ngbDropdownToggle>Mon compte</a>
           <div class="dropdown-menu-right" aria-labelledby="navbar-primary_dropdown_1" ngbDropdownMenu>
-            <div *ngIf="currentUser; else loggedOut" >
-              <a [routerLink]="['/user-profile']" class="dropdown-item" href="javascript:void(0)">Profil</a>
-              <a  (click)="logout()" class="dropdown-item" href="javascript:void(0)" >Se deconnecter</a>
-            </div>
-            <ng-template #loggedOut>
-              <a [routerLink]="['/login']" class="dropdown-item" href="javascript:void(0)">Se connecter</a>
+              <a  skipLocationChange="true" (click)="navigateToExternalLink()"class="dropdown-item" >Se connecter</a>
               <a [routerLink]="['/register']" class="dropdown-item" href="javascript:void(0)">S'inscrire</a>
-            </ng-template>
-           
           </div>
         </li>
       </ul>
