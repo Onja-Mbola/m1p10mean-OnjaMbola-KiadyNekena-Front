@@ -57,6 +57,11 @@ export class SignupComponent implements OnInit {
       onlySelf: true,
     });
   }
+  navigateToExternalLink() {
+       
+    window.location.href = 'http://localhost:4300/';
+}
+
   showSuccess(text) {
 		this.toastService.show(text, { classname: 'bg-success text-light m-3 p-3 ', delay: 10000 });
 	}

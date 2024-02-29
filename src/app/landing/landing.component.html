@@ -21,7 +21,7 @@
               </h1>
               <p class="lead  text-white">Bien plus qu'un salon, c'est un sanctuaire de beauté où l'excellence et l'innovation se rencontrent.</p>
               <div class="btn-wrapper">
-                <a href="#" class="btn btn-white btn-icon mb-3 mb-sm-0">
+                <a [routerLink]="['/register']" class="btn btn-white btn-icon mb-3 mb-sm-0">
                   <span class="btn-inner--icon"><i class="ni ni-user-run"></i></span>
                   <span class="btn-inner--text">Prendre un rendez-vous</span>
                 </a>
@@ -75,14 +75,15 @@
           <p class="lead text-muted">Bienvenue dans notre oasis de beauté, où chaque détail est conçu pour révéler votre éclat naturel. </p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+      
+      <div class="row" >
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0" *ngFor="let service of Services; let i = index">
           <div class="px-4">
-            <img src="./assets/img/theme/team-1-800x800.jpg" class="img-center img-fluid shadow shadow-lg--hover" style="width: 200px;">
+            <img src="./assets/img/services/service-default.jpeg" class="img-center img-fluid shadow shadow-lg--hover" style="width: 10em;object-fit: cover;height: 10em;">
             <div class="pt-4 text-center mb-4">
               <h5 class="title">
-                <span class="d-block mb-1 fbold">Epilation </span>
-                <small class="h6 text-muted"> Optez pour une peau douce et soyeuse. Découvrez nos services d’épilation pour une peau parfaitement lisse.</small>
+                <span class="d-block mb-1 fbold">{{ service.name }} </span>
+                <small class="h6 text-muted"> {{ service.description }}</small>
               </h5>
             </div>
           </div>

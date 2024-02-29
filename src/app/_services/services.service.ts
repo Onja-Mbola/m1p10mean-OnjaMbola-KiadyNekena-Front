@@ -10,11 +10,24 @@ import {
   providedIn: 'root',
 })
 export class ServiceService {
-  baseUri: string = 'http://localhost:3000/api/service';
+  baseUri: string = 'http://localhost:3000/api/services';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {}
   // Get all employees
+  // Get all service
+  getService(id): Observable<any> {
+    return this.http.get(`${this.baseUri}/read/${id}`).pipe(
+      map((res: Response) => {
+        return res || {};
+      })
+    );
+  }
   getServices() {
-    return this.http.get(`${this.baseUri}`);
+   
+    return this.http.get(`${this.baseUri}`).pipe(
+      map((res: Response) => {
+        return res || {};
+      })
+    );
   }
 }
