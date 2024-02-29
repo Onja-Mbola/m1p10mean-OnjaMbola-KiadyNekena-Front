@@ -10,7 +10,7 @@ import {
   providedIn: 'root',
 })
 export class ServiceService {
-  baseUri: string = 'http://localhost:3000/api/services';
+  baseUri: string = 'https://m1p10mean-onjambola-kiadynekena-back-2.onrender.com/api/services';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {}
   // Get all employees

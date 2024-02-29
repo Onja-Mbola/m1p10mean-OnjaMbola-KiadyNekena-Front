@@ -61,7 +61,7 @@ export class SignupComponent implements OnInit {
   }
   navigateToExternalLink() {
        
-    window.location.href = 'http://localhost:4300/';
+    window.location.href = 'https://m1p10mean-onja-mbola-kiady-nekena-back-e6j9.vercel.app/';
 }
 
   showSuccess(text) {
