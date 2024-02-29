@@ -19,10 +19,19 @@
   </div> -->
   <div class="container">
     <div class="row row-grid align-items-center" [ngClass]="{'my-md': getPath()!=='/user-profile' && getPath()!=='/register' && getPath()!=='/login', 'mb-5':getPath()==='/user-profile' || getPath()==='/register' || getPath()==='/login'}">
+      <div class="col-lg-7">
+        <h3 class="text-primary font-weight-light mb-2">Voici les Developpeurs du Site Web</h3>
+        <h4 class="mb-0 font-weight-light">ETU 000882 Andrianirimanjaka Onja Mbola</h4>
+        <h4 class="mb-0 font-weight-light">ETU 000909 Rakotoarinelina Valimbavaka Kiady Nekena</h4>
+      </div>
+      
       <div class="col-lg-6">
         <h3 class="text-primary font-weight-light mb-2">Merci de nous soutenir !</h3>
         <h4 class="mb-0 font-weight-light">Prenons contact sur l'une de ces plateformes.</h4>
       </div>
+
+      
+
       <div class="col-lg-6 text-lg-center btn-wrapper">
         <a target="_blank" href="https://twitter.com" class="btn btn-neutral btn-icon-only btn-twitter btn-round btn-lg" ngbTooltip="Follow us">
           <i class="fa fa-twitter"></i>
