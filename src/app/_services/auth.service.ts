@@ -31,7 +31,7 @@ export class AuthService {
   // Register
   registerClient(data): Observable<any> {
     let url = `${this.baseUri}/registerClient`;
-    return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+    return this.http.post(url, data);
   }
 
   /*registerClient(data): Observable<any> {

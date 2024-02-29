@@ -22,6 +22,8 @@ export class SignupComponent implements OnInit {
     focus2;
     model: any;
 
+    loading: boolean = false;
+
     constructor(
         public fb: FormBuilder,
         private router: Router,
@@ -47,7 +49,7 @@ export class SignupComponent implements OnInit {
           dateOfBirth: ['', [Validators.required]],
           sexe: ['', [Validators.required]],
           address: ['', [Validators.required]],
-          phoneNumber: ['', [Validators.required, phoneNumberValidator]],
+          phoneNumber: ['', [Validators.required]],
         });
       }
 
@@ -97,8 +99,10 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
     if (!this.registerForm.valid) {
       console.log('Le formulaire n\'est pas valide. État des contrôles :', this.registerForm);
+      this.loading = false;
       return false;
     } else {
       const formData = { ...this.registerForm.value };
@@ -112,6 +116,7 @@ export class SignupComponent implements OnInit {
           // Redirect to home ("/") route
             this.ngZone.run(() => {
                 this.router.navigateByUrl('/');
+                this.loading = false;
     
                 // Display an alert after redirection
                 // alert('Verify your email.'); // You might want to use a more user-friendly notification method
@@ -120,6 +125,7 @@ export class SignupComponent implements OnInit {
         },
         error: (e) => {
           console.log(e);
+          this.loading = false;
           this.showDanger(e.error.message);
         },
       });
